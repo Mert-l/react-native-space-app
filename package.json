@@ -9,13 +9,19 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "ajax": "^0.0.4",
+    "axios": "^1.4.0",
     "expo": "~48.0.18",
     "expo-status-bar": "~1.4.4",
+    "jquery": "^3.7.0",
     "react": "18.2.0",
-    "react-native": "0.71.8"
+    "react-native": "0.71.8",
+    "react-native-video": "^6.0.0-alpha.6",
+    "expo-av": "~13.2.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "@types/jquery": "^3.5.16"
   },
   "private": true
 }
