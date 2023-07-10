@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@react-native-community/datetimepicker": "6.7.3",
     "@react-navigation/drawer": "^6.6.3",
     "@react-navigation/native": "^6.1.7",
     "ajax": "^0.0.4",
@@ -21,9 +22,9 @@
     "react-native": "0.71.8",
     "react-native-dropdown-picker": "^5.4.6",
     "react-native-gesture-handler": "~2.9.0",
+    "react-native-paper": "^5.9.1",
     "react-native-reanimated": "~2.14.4",
-    "react-native-video": "^6.0.0-alpha.6",
-    "@react-native-community/datetimepicker": "6.7.3"
+    "react-native-video": "^6.0.0-alpha.6"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

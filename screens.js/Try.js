@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { IconButton } from "react-native-paper";
+
 
 import Navbar from './Navbar.js'
 
@@ -83,8 +85,8 @@ const submit =( ) => {
   return (
     <View style={styles.container}>
 
-        <TouchableOpacity>
-            <Text  style={styles.opn}  >kfvn</Text>
+        <TouchableOpacity   style={styles.opn}  onPress={() =>  setShowPicker(!showPicker)}  >
+        <IconButton icon="calendar-edit" size={30} iconColor="white" />
 
         </TouchableOpacity>
 
@@ -164,7 +166,7 @@ const styles = StyleSheet.create({
   first_part: {
     
     backgroundColor: 'transparent',
-    height: 130,
+    height: 200,
     width: '100%',
     alignItems: 'center',
     position: 'relative',
@@ -189,18 +191,18 @@ const styles = StyleSheet.create({
     marginTop: '15%',
   },
   images: {
-    zIndex: 0,
+  
     flex: 1,
     height: '100%',
   },
   opn: {
     position: 'absolute',
-    top:100,
-    right: 50,
-    backgroundColor: 'red',
-    height: 50,
-    width:50,
-     zIndex: 1,
+    top:50,
+    right: 10,
+ 
+    height: 60,
+    width:60,
+  zIndex:1,
     
   }
 
