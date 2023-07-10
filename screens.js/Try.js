@@ -11,7 +11,7 @@ import Navbar from './Navbar.js'
 
 export default function Home() {
 
-    // const refs = useRef();
+    const _scrollView = useRef(null);
 
 
     const [pictures, setPictures] = useState(null)
@@ -82,7 +82,7 @@ const submit =( ) => {
     setDate(selected)
     // refs._scrollView.scrollTo(0)
     // console.log('final date', final_date)
-    scrollTo({x: 0, y: 0, animated: true})
+    _scrollView.current.scrollTo({ x: 0, y: 0, animated: true });
 }
 
 
@@ -125,7 +125,7 @@ const submit =( ) => {
 </TouchableOpacity>
 
         <TouchableOpacity  onPress={() => setShowPicker(!showPicker)}     >
-        {showPicker && <IconButton icon="step-backward" size={30} iconColor="white" /> }
+        {showPicker && <IconButton icon="cancel" size={30} iconColor="white" /> }
         
 
 </TouchableOpacity>   
@@ -142,7 +142,7 @@ const submit =( ) => {
 
 
 
-<ScrollView style={styles.images} ref='_scrollView'  >
+<ScrollView style={styles.images} ref={_scrollView}>
 
 
 

@@ -10,6 +10,8 @@ import { Video } from "expo-av";
 import Home from "./screens.js/Home.js"
 import Other from  "./screens.js/Other.js"
 import Try from  "./screens.js/Try.js"
+import Another from  "./screens.js/Another.js"
+import Onemore from  "./screens.js/Onemore.js"
 
 export default function App() {
 
@@ -34,6 +36,8 @@ export default function App() {
         <Drawer.Screen name="home" component={Home} />
         <Drawer.Screen name="People in space" component={Other} />
         <Drawer.Screen name="try" component={Try} />
+        <Drawer.Screen name="another" component={Another} />
+        <Drawer.Screen name="one more" component={Onemore} />
       </Drawer.Navigator>
 
 </NavigationContainer>
