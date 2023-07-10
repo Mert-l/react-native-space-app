@@ -189,6 +189,7 @@ const styles = StyleSheet.create({
     height: '30%',
     // width: '50%',
     marginTop: '15%',
+    pacity: 0.5,
   },
   images: {
   
