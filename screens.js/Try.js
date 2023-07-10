@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
   first_part: {
     
     backgroundColor: 'transparent',
-    height: 200,
+    height: 300,
     width: '100%',
     alignItems: 'center',
     position: 'relative',
@@ -197,8 +197,8 @@ const styles = StyleSheet.create({
   },
   opn: {
     position: 'absolute',
-    top:50,
-    right: 10,
+    top:90,
+    left: 0,
  
     height: 60,
     width:60,
