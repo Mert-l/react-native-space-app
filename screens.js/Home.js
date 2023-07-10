@@ -23,7 +23,7 @@ export default function Home() {
         rate={1.0}
         volume={1.0}
         muted={true}
-        
+isLooping
         resizeMode={"cover"}
         repeat={true}
         style={styles.video}

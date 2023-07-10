@@ -11,43 +11,46 @@ export default function Home() {
     const [pictures, setPictures] = useState(null)
     const [date, setDate] = useState(new Date())
     const [showPicker, setShowPicker] = useState(false)
-    const [final_date, setFinal_date] = useState(new Date())
+    // const [final_date, setFinal_date] = useState(new Date())
+    const [selected,setSelected] = useState(null)
 
       useEffect(() => {
-    const fetchWeather = async() =>{    
-      const res= await axios.get(`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=${final_date}&api_key=llMjhUo9OGlmqJgR36fZX1CW6huP7lna3qTGsMUM`)
+    const fetchWeather = async() =>{   
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        const year = date.getFullYear();
+        const arr =[]
+        arr.push(year, month, day)
+        const final = arr.join('-')
+        console.log(final);
+        try {
+            const res= await axios.get(`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=${final}&api_key=llMjhUo9OGlmqJgR36fZX1CW6huP7lna3qTGsMUM`)
 
-        setPictures(res.data.photos)
-         console.log( 'the response',  res);
+            setPictures(res.data.photos)
+             console.log( 'the response',  res);
+        } catch (error) {
+            console.log(error);
+        }
+
         // cons}])
     }
     fetchWeather()
-    }, [final_date]);
+    }, [date]);
 //  pictures && console.log( 'pics:' , pictures[0].img_src)
 
 
  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate;
-    // setShowPicker(false);
-    const month = currentDate.getMonth() + 1;
-    const day = currentDate.getDay();
-    const year = currentDate.getFullYear();
-    const arr =[]
-    arr.push(year, month, day)
-    const final = arr.join('-')
-
-    console.log(final)
-    setDate(final);
+setSelected(selectedDate)
   };
 
 //  console.log('date', date)
 
 const submit =( ) => {
 
-    console.log('ready to filter')
+
     setShowPicker(!showPicker);
-    setFinal_date(date);
-    console.log('final date', final_date)
+    setDate(selected)
+    // console.log('final date', final_date)
 }
 
 
