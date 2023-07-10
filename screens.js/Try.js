@@ -1,0 +1,168 @@
+import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, SafeAreaView } from "react-native";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import DropDownPicker from 'react-native-dropdown-picker';
+import DateTimePicker from '@react-native-community/datetimepicker';
+
+import Navbar from './Navbar.js'
+
+export default function Home() {
+
+    const [pictures, setPictures] = useState(null)
+    const [date, setDate] = useState(new Date())
+    const [showPicker, setShowPicker] = useState(false)
+    const [final_date, setFinal_date] = useState(new Date())
+
+      useEffect(() => {
+    const fetchWeather = async() =>{    
+      const res= await axios.get(`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=${final_date}&api_key=llMjhUo9OGlmqJgR36fZX1CW6huP7lna3qTGsMUM`)
+
+        setPictures(res.data.photos)
+         console.log( 'the response',  res);
+        // cons}])
+    }
+    fetchWeather()
+    }, [final_date]);
+//  pictures && console.log( 'pics:' , pictures[0].img_src)
+
+
+ const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate;
+    // setShowPicker(false);
+    const month = currentDate.getMonth() + 1;
+    const day = currentDate.getDay();
+    const year = currentDate.getFullYear();
+    const arr =[]
+    arr.push(year, month, day)
+    const final = arr.join('-')
+
+    console.log(final)
+    setDate(final);
+  };
+
+//  console.log('date', date)
+
+const submit =( ) => {
+
+    console.log('ready to filter')
+    setShowPicker(!showPicker);
+    setFinal_date(date);
+    console.log('final date', final_date)
+}
+
+
+
+
+  return (
+    <View style={styles.container}>
+
+
+<View style={styles.first_part}  >
+    
+
+{/* <DropDownPicker
+        style={styles.date_picker}
+    items={[
+        {label: 'Item 1', value: 'item1'},
+        {label: 'Item 2', value: 'item2'},
+    ]}
+    defaultIndex={0}
+    containerStyle={{height: 40}}
+    onChangeItem={item => console.log(item.label, item.value)}
+/> */}
+
+
+{showPicker ? <Text style={styles.filtering}  onPress={submit}  >submit</Text> : <Text style={styles.filtering}  onPress={() =>  setShowPicker(true)}  >choose date</Text>}
+
+
+{ showPicker && <DateTimePicker style={styles.picker} mode='date' display='spinner' value={date} onChange={onChange}  />}
+
+
+</View>
+
+
+
+
+
+<ScrollView>
+
+
+
+
+        {  pictures && pictures.map(ele => {
+            return(
+            <View>
+            <Image
+            style={{
+              width: 400, 
+              height: 300, 
+            }}
+            source={{
+              uri: ele.img_src
+            }}
+          />
+
+          <Text> {ele.earth_date} </Text>
+
+          </View>
+)
+
+        })  } 
+
+      
+   </ScrollView> 
+
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  video: {
+    flex: 1,
+    width: "100%",
+  },
+  menu_icon:{
+    backgroundColor: 'red',
+    width: '100%',
+    height: '30%',
+    position: 'absolute',
+    top: 100,
+    left: 100,
+  },
+  first_part: {
+    backgroundColor: '#4E4F5D',
+    opacityValue: 0.5,
+    height: 130,
+    width: '100%',
+    alignItems: 'center',
+    position: 'relative',
+    // marginTop: '10%',
+    top: 0,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+ 
+  },
+  filtering: {
+    // position:"absolute",
+    // top: 60,
+    // left:0,
+    // marginBottom: '17%',
+    marginRight: '3%',
+    marginTop: '15%',
+   
+  },
+  picker: {
+    height: '30%',
+    // width: '50%',
+    marginTop: '15%',
+  },
+
+});
+
