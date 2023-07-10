@@ -14,7 +14,31 @@ export default function Home() {
     // const [final_date, setFinal_date] = useState(new Date())
     const [selected,setSelected] = useState(null)
 
-      useEffect(() => {
+
+
+     useEffect(() => {
+        const fetch_first_pics = async() =>{   
+           
+            try {
+                const res= await axios.get(`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/latest_photos?api_key=llMjhUo9OGlmqJgR36fZX1CW6huP7lna3qTGsMUM`)
+    
+                setPictures(res.data.latest_photos)
+                 console.log( 'the firstttttttt response',  res);
+            } catch (error) {
+                console.log(error);
+            }
+    
+            // cons}])
+        }
+        fetch_first_pics()
+        }, []);
+
+
+
+
+
+
+     useEffect(() => {
     const fetchWeather = async() =>{   
         const month = date.getMonth() + 1;
         const day = date.getDate();
@@ -59,40 +83,45 @@ const submit =( ) => {
   return (
     <View style={styles.container}>
 
+        <TouchableOpacity>
+            <Text  style={styles.opn}  >kfvn</Text>
 
-<View style={styles.first_part}  >
+        </TouchableOpacity>
+
+
+{showPicker &&  <View style={styles.first_part}  >
     
 
-{/* <DropDownPicker
-        style={styles.date_picker}
-    items={[
-        {label: 'Item 1', value: 'item1'},
-        {label: 'Item 2', value: 'item2'},
-    ]}
-    defaultIndex={0}
-    containerStyle={{height: 40}}
-    onChangeItem={item => console.log(item.label, item.value)}
-/> */}
-
-
-{showPicker ? <Text style={styles.filtering}  onPress={submit}  >submit</Text> : <Text style={styles.filtering}  onPress={() =>  setShowPicker(true)}  >choose date</Text>}
-
-
-{ showPicker && <DateTimePicker style={styles.picker} mode='date' display='spinner' value={date} onChange={onChange}  />}
-
-
-</View>
-
-
-
-
-
-<ScrollView>
+    {/* <DropDownPicker
+            style={styles.date_picker}
+        items={[
+            {label: 'Item 1', value: 'item1'},
+            {label: 'Item 2', value: 'item2'},
+        ]}
+        defaultIndex={0}
+        containerStyle={{height: 40}}
+        onChangeItem={item => console.log(item.label, item.value)}
+    /> */}
+    
+    
+    {showPicker ? <Text style={styles.filtering}  onPress={submit}  >submit</Text> : <Text style={styles.filtering}  onPress={() =>  setShowPicker(true)}  >choose date</Text>}
+    
+    
+    { showPicker && <DateTimePicker style={styles.picker} mode='date' display='spinner' value={date} onChange={onChange}  />}
+    
+    
+    </View>
+    }
 
 
 
 
-        {  pictures && pictures.map(ele => {
+<ScrollView style={styles.images}  >
+
+
+
+
+        {  pictures && pictures.length == 0 ? <Text>no pics on this day</Text> : pictures && pictures.map(ele => {
             return(
             <View>
             <Image
@@ -131,17 +160,10 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
   },
-  menu_icon:{
-    backgroundColor: 'red',
-    width: '100%',
-    height: '30%',
-    position: 'absolute',
-    top: 100,
-    left: 100,
-  },
+
   first_part: {
-    backgroundColor: '#4E4F5D',
-    opacityValue: 0.5,
+    
+    backgroundColor: 'transparent',
     height: 130,
     width: '100%',
     alignItems: 'center',
@@ -166,6 +188,21 @@ const styles = StyleSheet.create({
     // width: '50%',
     marginTop: '15%',
   },
+  images: {
+    zIndex: 0,
+    flex: 1,
+    height: '100%',
+  },
+  opn: {
+    position: 'absolute',
+    top:100,
+    right: 50,
+    backgroundColor: 'red',
+    height: 50,
+    width:50,
+     zIndex: 1,
+    
+  }
 
 });
 
