@@ -90,6 +90,7 @@ const submit =( ) => {
 
         </TouchableOpacity>
 
+      
 
 {showPicker &&  <View style={styles.first_part}  >
     
@@ -106,14 +107,20 @@ const submit =( ) => {
     /> */}
     
     
-    {showPicker ? <Text style={styles.filtering}  onPress={submit}  >submit</Text> : <Text style={styles.filtering}  onPress={() =>  setShowPicker(true)}  >choose date</Text>}
+
     
     
-    { showPicker && <DateTimePicker style={styles.picker} mode='date' display='spinner' value={date} onChange={onChange}  />}
-    
+    { showPicker && <DateTimePicker style={styles.picker} mode='date' display='spinner' value={date} onChange={onChange} themeVariant="light"  textColor="white"   />}
+< View  >
+        {showPicker && <Text style={styles.filtering}  onPress={submit}  >submit</Text> }
+        {showPicker && <Text style={styles.filtering}  onPress={() => setShowPicker(!showPicker)}  >cancel</Text> }
+<View/>
+
+
     
     </View>
     }
+
 
 
 
@@ -122,8 +129,7 @@ const submit =( ) => {
 
 
 
-
-        {  pictures && pictures.length == 0 ? <Text>no pics on this day</Text> : pictures && pictures.map(ele => {
+        {  pictures && pictures.length == 0 ? <Text style={styles.no_pics} >no pics on this day</Text> : pictures && pictures.map(ele => {
             return(
             <View>
             <Image
@@ -154,7 +160,8 @@ const submit =( ) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    position: 'relative',
+   
     alignItems: "center",
     justifyContent: "center",
   },
@@ -165,15 +172,23 @@ const styles = StyleSheet.create({
 
   first_part: {
     
-    backgroundColor: 'transparent',
+    backgroundColor: 'rgb(50, 50, 50)',
     height: 300,
     width: '100%',
     alignItems: 'center',
-    position: 'relative',
+   
     // marginTop: '10%',
-    top: 0,
+
     flexDirection: 'row',
     justifyContent: 'flex-end',
+    //  backgroundColor: 'b',
+     opacity: 0.90,
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    zIndex: 2,
+
+    
  
   },
   filtering: {
@@ -189,22 +204,25 @@ const styles = StyleSheet.create({
     height: '30%',
     // width: '50%',
     marginTop: '15%',
-    pacity: 0.5,
+  
   },
   images: {
   
-    flex: 1,
+   
     height: '100%',
   },
   opn: {
     position: 'absolute',
     top:90,
     left: 0,
- 
+    
     height: 60,
     width:60,
   zIndex:1,
     
+  },
+  no_pics: {
+    top: 200,
   }
 
 });
