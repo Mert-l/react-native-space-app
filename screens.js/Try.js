@@ -4,11 +4,15 @@ import axios from "axios";
 import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { IconButton } from "react-native-paper";
+import { useRef } from 'react';
 
 
 import Navbar from './Navbar.js'
 
 export default function Home() {
+
+    // const refs = useRef();
+
 
     const [pictures, setPictures] = useState(null)
     const [date, setDate] = useState(new Date())
@@ -76,7 +80,9 @@ const submit =( ) => {
 
     setShowPicker(!showPicker);
     setDate(selected)
+    // refs._scrollView.scrollTo(0)
     // console.log('final date', final_date)
+    scrollTo({x: 0, y: 0, animated: true})
 }
 
 
@@ -111,10 +117,21 @@ const submit =( ) => {
     
     
     { showPicker && <DateTimePicker style={styles.picker} mode='date' display='spinner' value={date} onChange={onChange} themeVariant="light"  textColor="white"   />}
-< View  >
-        {showPicker && <Text style={styles.filtering}  onPress={submit}  >submit</Text> }
-        {showPicker && <Text style={styles.filtering}  onPress={() => setShowPicker(!showPicker)}  >cancel</Text> }
-<View/>
+< View style={styles.two} >
+
+        <TouchableOpacity   onPress={submit}  >
+
+        {showPicker && <IconButton icon="content-save" size={25} iconColor="white" /> }
+</TouchableOpacity>
+
+        <TouchableOpacity  onPress={() => setShowPicker(!showPicker)}     >
+        {showPicker && <IconButton icon="step-backward" size={30} iconColor="white" /> }
+        
+
+</TouchableOpacity>   
+
+
+</View>
 
 
     
@@ -125,7 +142,7 @@ const submit =( ) => {
 
 
 
-<ScrollView style={styles.images}  >
+<ScrollView style={styles.images} ref='_scrollView'  >
 
 
 
@@ -223,7 +240,11 @@ const styles = StyleSheet.create({
   },
   no_pics: {
     top: 200,
+  },
+  two: {
+    marginTop: 50,
   }
+
 
 });
 
