@@ -35,9 +35,9 @@ export default function App() {
         <Drawer.Navigator  screenOptions={styles.nav}   >
         <Drawer.Screen name="home" component={Home} />
         <Drawer.Screen name="People in space" component={Other} />
-        <Drawer.Screen name="try" component={Try} />
-        <Drawer.Screen name="another" component={Another} />
-        <Drawer.Screen name="one more" component={Onemore} />
+        <Drawer.Screen name="Mars photo database" component={Try} />
+        <Drawer.Screen name="Space News" component={Another} />
+        <Drawer.Screen name="upcoming launches" component={Onemore} />
       </Drawer.Navigator>
 
 </NavigationContainer>
@@ -62,9 +62,9 @@ const styles = StyleSheet.create({
 
   nav: {
     drawerStyle: {
-       backgroundColor: 'black',
-      width: '50%',
-       opacity: '0.5',
+      backgroundColor: '#00000070',
+      width: '55%',
+      //  opacity: '0.5',
       overlayColor: '0.9',
       
     },
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
       color: 'grey'
     },
     drawerActiveTintColor: '#FFFFFF',
-    drawerInactiveTintColor: '#E0E1EE',
+    drawerInactiveTintColor: '#DADBDE',
     drawerHideStatusBarOnOpen: 'true',
     headerTintColor: 'white',
     headerTransparent: 'true',
