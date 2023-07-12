@@ -116,7 +116,7 @@ const submit =( ) => {
 
     
     
-    { showPicker && <DateTimePicker style={styles.picker} mode='date' display='spinner' value={date} onChange={onChange} themeVariant="light"  textColor="white"   />}
+    { showPicker && <DateTimePicker style={styles.picker} mode='date' display='spinner' value={date} onChange={onChange} themeVariant="light"  textColor="white"  maximumDate={new Date()}  />}
 < View style={styles.two} >
 
         <TouchableOpacity   onPress={submit}  >
@@ -146,7 +146,7 @@ const submit =( ) => {
 
 
 
-        {  pictures && pictures.length == 0 ? <Text style={styles.no_pics} >no pics on this day</Text> : pictures && pictures.map(ele => {
+        {  pictures && pictures.length == 0 ? <Text style={styles.no_pics} >no pics on this day</Text> : pictures && pictures.map((ele, idx) => {
             return(
             <View>
             <Image

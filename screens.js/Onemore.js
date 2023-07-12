@@ -72,7 +72,7 @@ launches && organise();
             <Text style={styles.txt}  > Description: {item.desc}  </Text>
             <Text style={styles.txt}  > Vehicle: {item.vehicle}  </Text>
             <Text style={{color: 'white', textDecorationLine: true, marginLeft: '3%', }}
-      onPress={() => Linking.openURL(item.url)}>
+      onPress={() => Linking.openURL(item.url)}> 
 Link to a live stream
 </Text>
 

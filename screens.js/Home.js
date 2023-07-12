@@ -1,63 +1,89 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import backgroundVideo from "../assets/Earth_Background.mp4";
-import { Video } from "expo-av";
-import Navbar from './Navbar.js'
+import * as React from 'react';
+import { View, useWindowDimensions } from 'react-native';
+import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
+import Another from  "./Another.js"
+import Onemore from  "./Onemore.js"
+import globe from  "./Globe.js"
+import Mars from  "./Mars.js"
+import Saturn from  "./Saturn.js"
+import Venus from  "./Venus.js"
+import Uranus from  "./Uranus.js"
+import Jupiter from  "./Jupiter.js"
+import Neptune from  "./Neptune.js"
+import Mercury from  "./Mercury.js"
+
+
+
+const renderScene = SceneMap({
+  first: globe,
+   second: Venus,
+ third: Uranus,
+  fourth: Mars,
+   fifth: Saturn,
+   six: Jupiter,
+   seven: Neptune,
+   eight: Mercury,
+});
 
 export default function Home() {
-  const video = React.useRef(null);
-  useEffect(() => {
-    video.current.playAsync();
-  }, []);
+  const layout = useWindowDimensions();
+
+  const [index, setIndex] = React.useState(0);
+  const [routes] = React.useState([
+    { key: 'first', title: 'First' },
+   { key: 'second', title: 'Second' },
+     { key: 'third', title: 'third' },
+    { key: 'fourth', title: 'fourth' },
+    { key: 'fifth', title: 'fifth' },
+    { key: 'six', title: 'six' },
+    { key: 'seven', title: 'seven' },
+    { key: 'eight', title: 'eight' },
+
+  ]);
+
+
+  const renderTabBar = props => (
+    <TabBar
+      {...props}
+      indicatorStyle={{ backgroundColor: 'transparent' }}
+      style={{ backgroundColor: 'transparent', height: 0.1 }}
+    />
+  );
+
+
+
   return (
-    <View style={styles.container}>
-
-
-
-
+    <TabView
+      navigationState={{ index, routes }}
+      renderScene={renderScene}
+      onIndexChange={setIndex}
+      initialLayout={{ width: layout.width }}
+      tabBarPosition= 'top'
+      pagerStyle
+      renderTabBar={renderTabBar}
       
-      <Video
-        ref={video}
-        source={backgroundVideo}
-        rate={1.0}
-        volume={1.0}
-        muted={true}
-isLooping
-        resizeMode={"cover"}
-        repeat={true}
-        style={styles.video}
-      />
-
-      {/* <TouchableOpacity style={styles.menu_icon}   onPress={()=> console.log('pressed ')}  >
-      <View  />
-      </TouchableOpacity> */}
-
-{/* <Navbar/> */}
-
-
-    </View>
+    />
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  video: {
-    flex: 1,
-    width: "100%",
-  },
-  menu_icon:{
-    backgroundColor: 'red',
-    width: '100%',
-    height: '30%',
-    position: 'absolute',
-    top: 100,
-    left: 100,
-  }
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: "#fff",
+//     alignItems: "center",
+//     justifyContent: "center",
+//   },
+//   video: {
+//     flex: 1,
+//     width: "100%",
+//   },
+//   menu_icon:{
+//     backgroundColor: 'red',
+//     width: '100%',
+//     height: '30%',
+//     position: 'absolute',
+//     top: 100,
+//     left: 100,
+//   }
+// });
 

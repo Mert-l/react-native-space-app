@@ -35,7 +35,7 @@ articles && console.log(articles)
 
             <ScrollView>
             
-           { articles &&  articles.map(ele => {
+           { articles &&  articles.map((ele, idx) => {
 
                 return(
 

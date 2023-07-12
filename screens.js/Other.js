@@ -1,14 +1,14 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, FlatList, ScrollView } from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, FlatList, ScrollView, ImageBackground } from "react-native";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import backgroundVideo from "../assets/Earth_Background.mp4";
-import { Video } from "expo-av";
+
 
 
 export default function Other() {
 
     const spacecrafts = [];
     const [res, setRes] = useState(null)
+    const image = {uri: 'https://eoportal.org/ftp/satellite-missions/a/Axiom_020622/Axiom_Auto6.jpeg'};
 
   useEffect(() => {
     const fetchWeather = async() =>{    
@@ -24,9 +24,7 @@ export default function Other() {
 
 
     // res && console.log(res)
-   res && console.log(res.people.map(ele=>{
-    console.log(Object.keys(ele))
-   }))
+
 
     const organise = () => {
 
@@ -47,8 +45,13 @@ export default function Other() {
 
     // res && console.log(res.people[0].name)
 
-console.log('ofc its an error', spacecrafts)
+
   return (
+
+
+    <View style={styles.containerr}>
+    <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+     
 
 
     <SafeAreaView style={styles.container}>
@@ -57,7 +60,7 @@ console.log('ofc its an error', spacecrafts)
 
         <Text style={styles.cap}  > There are {res&& spacecrafts.length} spacecrafts and {res && res.people.length} people in space right now </Text>
 
-        {res && spacecrafts.map(ele=> {
+        {res && spacecrafts.map((ele, idx) => {
             return(
                 
                 
@@ -93,6 +96,24 @@ console.log('ofc its an error', spacecrafts)
 
     </SafeAreaView>
 
+
+
+
+    </ImageBackground>
+  </View>
+
+
+
+
+
+
+
+
+
+
+
+
+ 
     
   );
 }
@@ -100,10 +121,14 @@ console.log('ofc its an error', spacecrafts)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#303144",
+
     alignItems: "center",
     justifyContent: "center",
     justifyContent: 'space-around'
+  },
+  containerr: {
+    flex: 1,
+   
   },
  
   e: {
@@ -114,7 +139,7 @@ const styles = StyleSheet.create({
   seperate: {
     justifyContent: 'space-between',
     margonTop: '40%',
-    backgroundColor: '#494C71',
+    backgroundColor: '#45474D95',
     width: '77%',
     height: '35%',
     borderRadius: 15,
@@ -122,14 +147,14 @@ const styles = StyleSheet.create({
 
   list: {
     padding: '5%',
-    backgroundColor: '#5C5E77',
+    backgroundColor: '#A4A6AB20',
     borderBottomEndRadius: 15,
     borderBottomStartRadius: 15,
     
   },
   list_item:{
     padding:'4%',
-    backgroundColor: '#8587A0',
+    backgroundColor: '#D3D6DD50',
     marginTop: '5%',
     borderRadius: 15,
   },
@@ -143,6 +168,10 @@ const styles = StyleSheet.create({
     marginTop: '10%',
     fontSize: 14,
     
+  },
+  image: {
+    flex: 1,
+    justifyContent: 'center',
   }
 
 
