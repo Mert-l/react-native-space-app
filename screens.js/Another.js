@@ -17,7 +17,7 @@ export default function Another() {
     
                 setArticles(res.data.results)            
                  console.log( 'news',  res);
-                 setSpinning(false)
+                  // setSpinning(false)
             } catch (error) {
                 console.log(error);
             }
@@ -47,9 +47,10 @@ articles && console.log(articles)
            { articles &&  articles.map((ele, idx) => {
 
                 return(
+                 
 
                     <View style={styles.seperate}  >
-
+ 
                     <Text> {ele.title} </Text>
                     <Text> {ele.news_site} </Text>
                     
@@ -61,6 +62,7 @@ articles && console.log(articles)
             source={{
               uri: ele.image_url
             }}
+          onLoad={idx > 20 ? () => setSpinning(false) : null }
           />
 
 <Text> {ele.summary} </Text>

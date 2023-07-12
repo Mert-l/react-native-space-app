@@ -121,16 +121,7 @@ const submit =( ) => {
 {showPicker &&  <View style={styles.first_part}  >
     
 
-    {/* <DropDownPicker
-            style={styles.date_picker}
-        items={[
-            {label: 'Item 1', value: 'item1'},
-            {label: 'Item 2', value: 'item2'},
-        ]}
-        defaultIndex={0}
-        containerStyle={{height: 40}}
-        onChangeItem={item => console.log(item.label, item.value)}
-    /> */}
+
     
     
 
