@@ -157,6 +157,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#D3D6DD50',
     marginTop: '5%',
     borderRadius: 15,
+    color: 'white',
   },
   craft_name: {
     color: 'white',
