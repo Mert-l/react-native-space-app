@@ -1,10 +1,12 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, SafeAreaView } from "react-native";
-import React, { useState, useEffect } from "react";
+import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, SafeAreaView, Platform } from "react-native";
+import React, { useState, useEffect, Component } from "react";
 import axios from "axios";
+
 import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { IconButton } from "react-native-paper";
 import { useRef } from 'react';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 
 import Navbar from './Navbar.js'
@@ -13,12 +15,16 @@ export default function Home() {
 
     const _scrollView = useRef(null);
 
-
+   const {spinning, setSpinning} = useState(true);
     const [pictures, setPictures] = useState(null)
     const [date, setDate] = useState(new Date())
     const [showPicker, setShowPicker] = useState(false)
     // const [final_date, setFinal_date] = useState(new Date())
     const [selected,setSelected] = useState(null)
+
+  
+     
+
 
 
 
@@ -29,6 +35,7 @@ export default function Home() {
                 const res= await axios.get(`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/latest_photos?api_key=llMjhUo9OGlmqJgR36fZX1CW6huP7lna3qTGsMUM`)
     
                 setPictures(res.data.latest_photos)
+                setSpinning(false);
                  console.log( 'the firstttttttt response',  res);
             } catch (error) {
                 console.log(error);
@@ -57,6 +64,7 @@ export default function Home() {
             const res= await axios.get(`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=${final}&api_key=llMjhUo9OGlmqJgR36fZX1CW6huP7lna3qTGsMUM`)
 
             setPictures(res.data.photos)
+            setSpinning(false)
              console.log( 'the response',  res);
         } catch (error) {
             console.log(error);
@@ -90,6 +98,16 @@ const submit =( ) => {
 
   return (
     <View style={styles.container}>
+
+
+<Spinner
+          visible={spinning}
+          textContent={'Loading...'}
+          textStyle={styles.spinnerTextStyle}
+        />
+
+
+
 
         <TouchableOpacity   style={styles.opn}  onPress={() =>  setShowPicker(!showPicker)}  >
         <IconButton icon="calendar-edit" size={30} iconColor="white" />
