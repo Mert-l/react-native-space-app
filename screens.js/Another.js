@@ -2,10 +2,12 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, ScrollVi
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Linking } from 'react-native';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 export default function Another() {
 
     const [articles, setArticles] = useState(null);
+    const [spinning, setSpinning] = useState(true)
 
     useEffect(() => {
         const fetch_first_pics = async() =>{   
@@ -15,6 +17,7 @@ export default function Another() {
     
                 setArticles(res.data.results)            
                  console.log( 'news',  res);
+                 setSpinning(false)
             } catch (error) {
                 console.log(error);
             }
@@ -32,6 +35,12 @@ articles && console.log(articles)
   return (
 
         <SafeAreaView>
+
+<Spinner
+          visible={spinning}
+          textContent={'Loading...'}
+          textStyle={styles.spinnerTextStyle}
+        />
 
             <ScrollView>
             

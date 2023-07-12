@@ -15,7 +15,7 @@ export default function Home() {
 
     const _scrollView = useRef(null);
 
-   const {spinning, setSpinning} = useState(true);
+   const [spinning, setSpinning] = useState(true);
     const [pictures, setPictures] = useState(null)
     const [date, setDate] = useState(new Date())
     const [showPicker, setShowPicker] = useState(false)
@@ -52,6 +52,7 @@ export default function Home() {
 
 
      useEffect(() => {
+      setSpinning(true)
     const fetchWeather = async() =>{   
         const month = date.getMonth() + 1;
         const day = date.getDate();
@@ -88,6 +89,7 @@ const submit =( ) => {
 
     setShowPicker(!showPicker);
     setDate(selected)
+   
     // refs._scrollView.scrollTo(0)
     // console.log('final date', final_date)
     _scrollView.current.scrollTo({ x: 0, y: 0, animated: true });
