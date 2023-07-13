@@ -2,10 +2,9 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, ScrollVi
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Linking } from 'react-native';
-import Notifications from  "./Notifications"
 
 
-export default function Onemore() {
+export default function Onemore(props) {
 
     const [launches, setLanuches] = useState(null);
     const arr = [];
@@ -51,19 +50,7 @@ export default function Onemore() {
 launches && organise();
   console.log( 'arrr:',  arr)
 
-  const send_notification = () => {
 
-      for (ele of launches){
-
-          if(true){
-            <Notifications/>
-          }
-
-
-      }
-
-
-  }
 
 
 // launches && console.log(launches)
