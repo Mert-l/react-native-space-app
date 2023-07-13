@@ -1,7 +1,12 @@
-// import { View as GraphicsView } from 'expo-graphics';
+// // import { View as GraphicsView } from 'expo-graphics';
 // import ExpoTHREE, { THREE } from 'expo-three';
 // import React from 'react';
 // import {Platform} from "react-native";
+// import { GLView } from 'expo-gl';
+// // const texture = require('./assets/earth2.png');
+// // const bump = require("./assets/earthbump.png");
+// import texture from '../assets/earth2.png';
+// import bump from "../assets/earthbump.png"
 
 // let cordsArray = [{lat: 59.9139, lon: 10.7522}, {lat:51.508476 ,lon: -0.103321}, {lat:48.5124 ,lon: 2.103321}, {lat:69.5836 ,lon: 23.1745}];
 
@@ -11,7 +16,7 @@
 //         // Create an `ExpoGraphics.View` covering the whole screen, tell it to call our
 //         // `onContextCreate` function once it's initialized.
 //         return (
-//             <GraphicsView
+//             <GLView
 //                 style={{ flex: 1 }}
 //                 onContextCreate={this.onContextCreate}
 //                 onRender={this.onRender}
@@ -41,8 +46,7 @@
 
 
 
-//         const texture = require('./assets/earth2.png');
-//         const bump = require("./assets/earthbump.png");
+    
 //         let map;
 //         let bumpMap;
 //         let bumpScale = 0.2;

@@ -14,6 +14,8 @@ import Try from  "./screens.js/Try.js"
 import Another from  "./screens.js/Another.js"
 import Onemore from  "./screens.js/Onemore.js"
  import globe from  "./screens.js/Globe.js"
+//  import Another_try from  "./screens.js/Another_try"
+import Notifications from  "./screens.js/Notifications"
 
 
 export default function App() {
@@ -39,6 +41,8 @@ export default function App() {
         <Drawer.Screen name="Mars photo database" component={Try}   />
         <Drawer.Screen name="Space News" component={Another}   />
         <Drawer.Screen name="upcoming launches" component={Onemore} />
+        {/* <Drawer.Screen name="Another_try" component={Another_try} /> */}
+        <Drawer.Screen name="nots" component={Notifications} />
        
       </Drawer.Navigator>
 
