@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, FlatList, ScrollView, ImageBackground } from "react-native";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import Spinner from 'react-native-loading-spinner-overlay';
 
 
 export default function Other() {
-
+  const [spinning, setSpinning] = useState(true);
     const spacecrafts = [];
     const [res, setRes] = useState(null)
     const image = {uri: 'https://eoportal.org/ftp/satellite-missions/a/Axiom_020622/Axiom_Auto6.jpeg'};
@@ -15,13 +15,13 @@ export default function Other() {
         fetch('http://api.open-notify.org/astros.json')
         .then(response =>  response.json())
         .then(data => setRes(data));
-
+        
+        setSpinning(false);
        
     }
     fetchWeather()
    
     }, []);
-
 
     // res && console.log(res)
 
@@ -50,6 +50,15 @@ export default function Other() {
 
 
     <View style={styles.containerr}>
+
+      
+<Spinner
+          visible={spinning}
+          textContent={'Loading...'}
+          textStyle={styles.spinnerTextStyle}
+        />
+
+
     <ImageBackground source={image} resizeMode="cover" style={styles.image}>
      
 
@@ -173,6 +182,9 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     justifyContent: 'center',
+  },
+  spinnerTextStyle: {
+    color: 'white',
   }
 
 

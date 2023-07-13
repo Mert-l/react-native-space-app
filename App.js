@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View, Image, SafeAreaView } from "react-native";
 import React, { useState, useEffect } from "react";
+import { useRoute } from '@react-navigation/native';
 // import 'react-native-gesture-handler';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
-
+import { createNavigationContainerRef } from "@react-navigation/native"
 import axios from "axios";
 import backgroundVideo from "./assets/Earth_Background.mp4";
 import { Video } from "expo-av";
@@ -14,22 +15,29 @@ import Another from  "./screens.js/Another.js"
 import Onemore from  "./screens.js/Onemore.js"
  import globe from  "./screens.js/Globe.js"
 
+
 export default function App() {
 
-  const Drawer = createDrawerNavigator();
 
+ const [route, setRoute] = useState('')
+  const Drawer = createDrawerNavigator();
 
 
   return (
 
         <View  style = {styles.container} >
   
-      <NavigationContainer>
+  <NavigationContainer 
+
+  
+  
+  
+  >
         <Drawer.Navigator  screenOptions={styles.nav}   >
         <Drawer.Screen name="home" component={Home} />
         <Drawer.Screen name="People in space" component={Other} />
-        <Drawer.Screen name="Mars photo database" component={Try} />
-        <Drawer.Screen name="Space News" component={Another} />
+        <Drawer.Screen name="Mars photo database" component={Try}   />
+        <Drawer.Screen name="Space News" component={Another}   />
         <Drawer.Screen name="upcoming launches" component={Onemore} />
        
       </Drawer.Navigator>

@@ -48,7 +48,7 @@ export default function Saturn() {
     <Video
     ref={video}
     source={backgroundVideo}
-    rate={2.0}
+    rate={3.0}
     volume={1.0}
     muted={true}
 isLooping
