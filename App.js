@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, SafeAreaView } from "react-native";
+import { StyleSheet, Text, View, Image, SafeAreaView, Button } from "react-native";
 import React, { useState, useEffect, useRef } from "react";
 import { useRoute } from '@react-navigation/native';
 // import 'react-native-gesture-handler';
@@ -14,9 +14,9 @@ import Try from  "./screens.js/Try.js"
 import Another from  "./screens.js/Another.js"
 import Onemore from  "./screens.js/Onemore.js"
  import globe from  "./screens.js/Globe.js"
+ import * as Notifications from 'expo-notifications';
+ import Constants from 'expo-constants';
 //  import Another_try from  "./screens.js/Another_try"
-import Constants from 'expo-constants';
-import * as Notifications from 'expo-notifications';
 
 
 Notifications.setNotificationHandler({
@@ -29,61 +29,17 @@ Notifications.setNotificationHandler({
 
 
 
-export default function App() {
 
+
+export default function App() {
+ const [route, setRoute] = useState('')
+  const Drawer = createDrawerNavigator();
 
 
   const [expoPushToken, setExpoPushToken] = useState('');
   const [notification, setNotification] = useState(false);
   const notificationListener = useRef();
   const responseListener = useRef();
-
-
-
-
- const [route, setRoute] = useState('')
-  const Drawer = createDrawerNavigator();
-
-
-
-
-  let registerForPushNotificationsAsync = async() => {
-    let token;
-    if (Constants.isDevice) {
-      const { status: existingStatus } = await Notifications.getPermissionsAsync();
-      let finalStatus = existingStatus;
-      if (existingStatus !== 'granted') {
-        const { status } = await Notifications.requestPermissionsAsync();
-        finalStatus = status;
-      }
-      if (finalStatus !== 'granted') {
-        alert('Failed to get push token for push notification!');
-        return;
-      }
-      token = (await Notifications.getExpoPushTokenAsync()).data;
-      console.log('Your token is ', token);
-    } else {
-      alert('Must use physical device for Push Notifications');
-    }
-  
-    if (Platform.OS === 'android') {
-      Notifications.setNotificationChannelAsync('default', {
-        name: 'default',
-        importance: Notifications.AndroidImportance.MAX,
-        vibrationPattern: [0, 250, 250, 250],
-        lightColor: '#FF231F7C',
-      });
-    }
-  
-    return token;
-  }
-
-
-
-
-
-
-
 
 
   let sendTokenToServer = async(token, userID)=>{
@@ -124,13 +80,12 @@ export default function App() {
   }, []);
 
 
-
   async function sendPushNotification(expoPushToken) {
     const message = {
       to: expoPushToken,
       sound: 'default',
       title: 'Original Title',
-      body: 'And here is the body!',
+      body: 'And here is the bodyhbfvksbvksvdbk!',
       data: { someData: 'goes here' },
     };
   
@@ -144,15 +99,48 @@ export default function App() {
       body: JSON.stringify(message),
     });
   }
+  
+  let registerForPushNotificationsAsync = async() => {
+    let token;
+    if (Constants.isDevice) {
+      const { status: existingStatus } = await Notifications.getPermissionsAsync();
+      let finalStatus = existingStatus;
+      if (existingStatus !== 'granted') {
+        const { status } = await Notifications.requestPermissionsAsync();
+        finalStatus = status;
+      }
+      if (finalStatus !== 'granted') {
+        alert('Failed to get push token for push notification!');
+        return;
+      }
+      token = (await Notifications.getExpoPushTokenAsync()).data;
+      console.log('Your token is ', token);
+    } else {
+      alert('Must use physical device for Push Notifications');
+    }
+  
+    if (Platform.OS === 'android') {
+      Notifications.setNotificationChannelAsync('default', {
+        name: 'default',
+        importance: Notifications.AndroidImportance.MAX,
+        vibrationPattern: [0, 250, 250, 250],
+        lightColor: '#FF231F7C',
+      });
+    }
+  console.log('tttoookkkeeen??:', token)
+    return token;
+  }
+
+
+
+
 
 
 
   return (
-
         <View  style = {styles.container} >
   
   <NavigationContainer 
-
   
   
   
@@ -162,20 +150,33 @@ export default function App() {
         <Drawer.Screen name="People in space" component={Other} />
         <Drawer.Screen name="Mars photo database" component={Try}   />
         <Drawer.Screen name="Space News" component={Another}   />
-        <Drawer.Screen name="upcoming launches" component={Onemore}    send={sendPushNotification()} />
+        <Drawer.Screen name="upcoming launches" component={Onemore}  initialParams={{ send_n: sendPushNotification(expoPushToken)  }}  />
         {/* <Drawer.Screen name="Another_try" component={Another_try} /> */}
-        
-       
+ 
+
       </Drawer.Navigator>
 
 </NavigationContainer>
 
+<Button
+    title="Press to Send Notification"
+    onPress={async () => {
+      await sendPushNotification(expoPushToken);
+    }}
+    />
 
 
     </View>
-  )
-}
+  );
 
+
+
+
+
+
+
+
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -187,7 +188,6 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
   },
-
   nav: {
     drawerStyle: {
       backgroundColor: '#00000070',
@@ -214,7 +214,6 @@ const styles = StyleSheet.create({
     headerTransparent: 'true',
     
   
-
   }
   
 });
