@@ -71,7 +71,7 @@ export default function Home() {
         );
 
         setPictures(res.data.photos);
-     console.log('chec them out:', pictures)
+     
       } catch (error) {
         console.log(error);
       }
@@ -129,13 +129,13 @@ export default function Home() {
           <View style={styles.two}>
             <TouchableOpacity onPress={submit}>
               {showPicker && (
-                <IconButton icon="content-save" size={25} iconColor="white" />
+                <Text  style={{color: 'white', size: 15}}   >Submit</Text>
               )}
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => setShowPicker(!showPicker)}>
               {showPicker && (
-                <IconButton icon="cancel" size={30} iconColor="white" />
+                  <Text  style={{color: 'white', size: 15}}   >Cancle</Text>
               )}
             </TouchableOpacity>
           </View>
@@ -150,7 +150,7 @@ export default function Home() {
           !spinning &&
           pictures.map((ele, idx) => {
             return (
-              <View style={styles.seperate}  >
+              <View style={styles.seperate} key ={idx *Math.random() } >
                 <Image
                   style={{
                     height: Dimensions.get("window").height * 0.5,
@@ -247,6 +247,9 @@ const styles = StyleSheet.create({
   },
   two: {
     marginTop: 50,
+    marginRight: '2%',
+    height: '20%',
+    justifyContent: 'space-between'
   },
   spinnerTextStyle: {
     color: 'white',
@@ -256,14 +259,22 @@ const styles = StyleSheet.create({
     bottom: 0,
     color: 'white',
     alignItems: 'baseline',
+    // backgroundColor: 'red',
   }, txt: {
     color:'white',
     marginLeft: '1%',
     marginBottom: '0.6%',
+    backgroundColor: '#00000060',
+    width: '100%',
   },
   seperate: {
     marginTop: '3%',
-  }
+  },
+  spinnerTextStyle: {
+    color: 'white',
+    fontWeight: 400,
+    
+  },
 
 
 });

@@ -11,17 +11,19 @@ import React, { useState, useEffect, useLayoutEffect } from "react";
 import axios from "axios";
 import { Linking } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
-import { useRoute } from "@react-navigation/native";
+// import { useRoute } from "@react-navigation/native";
 import { Dimensions } from "react-native";
 
 
-export default function Another({ navigation }) {
+export default function Another({ route, navigation }) {
+  // const route = useRoute()
   const [articles, setArticles] = useState(null);
   const [spinning, setSpinning] = useState(true);
 
   useLayoutEffect(() => {
     navigation.setOptions({ headerTintColor: "#0F2357" });
   });
+
 
 
   useEffect(() => {
@@ -36,7 +38,7 @@ export default function Another({ navigation }) {
         }));
         setArticles(result);
        
-        // setSpinning(false)
+         setSpinning(false)
       } catch (error) {
         console.log(error);
       }
@@ -49,9 +51,12 @@ export default function Another({ navigation }) {
   const handleLoading = (idx) => {
     let objToString = JSON.stringify(articles);
     let copyObj = JSON.parse(objToString);
-    // let articlesCopy = [...articles];
-    copyObj[idx].loaded = true;
-    setArticles(copyObj);
+    if (!copyObj[idx].loaded) {
+      copyObj[idx].loaded = true;
+      setArticles(copyObj);
+       console.log('ble')
+    }
+   
   };
 
   useEffect(() => {
@@ -75,7 +80,7 @@ export default function Another({ navigation }) {
         {articles &&
           articles.map((ele, idx) => {
             return (
-              <View style={styles.seperate}>
+              <View style={styles.seperate}  key ={idx *Math.random() } >
                 <Text  style={ styles.title}  > {ele.data.title} </Text>
                 <Text  style={ styles.other} > {ele.data.news_site} </Text>
 
@@ -138,7 +143,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20, 
     color: '#0F2357' ,
-    fontFamily: 'American Typewriter, serif',
+    // fontFamily: 'American Typewriter, serif',
     fontWeight: '600',
     padding: '2%',
     paddingLeft: 0,
@@ -149,7 +154,7 @@ const styles = StyleSheet.create({
   other: {
     fontSize: 16, 
     color: '#0F2357' ,
-    fontFamily: 'American Typewriter, serif',
+    // fontFamily: 'American Typewriter, serif',
     fontWeight: '500',
     padding: '2%',
     // paddingLeft: 0,

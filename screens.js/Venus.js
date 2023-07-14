@@ -24,7 +24,7 @@ export default function Venus() {
                 const res= await axios.get(`https://api.le-systeme-solaire.net/rest/bodies/{venus}`)
     
                 setPlanet(res.data)
-                console.log( 'ze risponse of bodies',  res);
+             
             } catch (error) {
                 console.log(error);
             }
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     txt: {
       color: 'white',
       marginLeft: '3%',
-      backgroundColor: '#999B9F30',
+      // backgroundColor: '#999B9F30',
       width: '50%',
       padding: '3%',
       borderTopEndRadius: '15',

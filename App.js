@@ -58,7 +58,6 @@ export default function App() {
     registerForPushNotificationsAsync()
     .then(token => {
       setExpoPushToken(token)
-      if(token){sendTokenToServer(token, 'someUsername')}
     })
 
 
@@ -80,12 +79,13 @@ export default function App() {
   }, []);
 
 
-  async function sendPushNotification(expoPushToken) {
+  async function sendPushNotification( launch) {
+    
     const message = {
       to: expoPushToken,
       sound: 'default',
       title: 'Original Title',
-      body: 'And here is the bodyhbfvksbvksvdbk!',
+      body: `And here is the ${launch}!`,
       data: { someData: 'goes here' },
     };
   
@@ -150,7 +150,7 @@ export default function App() {
         <Drawer.Screen name="People in space" component={Other} />
         <Drawer.Screen name="Mars photo database" component={Try}   />
         <Drawer.Screen name="Space News" component={Another}   />
-        <Drawer.Screen name="upcoming launches" component={Onemore}  initialParams={{ send_n: sendPushNotification(expoPushToken)  }}  />
+        <Drawer.Screen name="upcoming launches" component={Onemore}  initialParams={{ send_n: sendPushNotification  }}  />
         {/* <Drawer.Screen name="Another_try" component={Another_try} /> */}
  
 
@@ -158,12 +158,12 @@ export default function App() {
 
 </NavigationContainer>
 
-<Button
+{/* <Button
     title="Press to Send Notification"
     onPress={async () => {
-      await sendPushNotification(expoPushToken);
+      await sendPushNotification();
     }}
-    />
+    /> */}
 
 
     </View>

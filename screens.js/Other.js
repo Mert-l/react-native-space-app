@@ -73,7 +73,7 @@ export default function Other() {
             return(
                 
                 
-                    <View style={styles.seperate}  >
+                    <View style={styles.seperate} key ={idx *Math.random() } >
                             <Text  style={styles.craft_name}  > {ele} </Text>
 
 

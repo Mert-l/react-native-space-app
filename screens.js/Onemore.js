@@ -2,12 +2,23 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, ScrollVi
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Linking } from 'react-native';
+// import { useRoute } from "@react-navigation/native";
 
 
-export default function Onemore(props) {
-
+export default function Onemore({route}) {
+// const route = useRoute()
     const [launches, setLanuches] = useState(null);
     const arr = [];
+
+
+    // useEffect(()=>{
+    //   console.log('e',launches)
+    //   if(launches){
+    //     route.params.send_n( 'Hello' )
+
+    //   }
+   
+    //   },[launches])
 
     useEffect(() => {
         const fetch_first_pics = async() =>{   
@@ -16,7 +27,7 @@ export default function Onemore(props) {
                 const res= await axios.get(`https://fdo.rocketlaunch.live/json/launches/next/5`)
     
                 setLanuches(res.data.result)
-                console.log( 'ze risponse',  res);
+            
             } catch (error) {
                 console.log(error);
             }
@@ -33,7 +44,7 @@ export default function Onemore(props) {
 
          let link =   ele.quicktext.split(' - ')
         
-         console.log( 'the link',  link);
+  
                 arr.push({
                     date: ele.date_str,
                     desc: ele.launch_description,
@@ -48,7 +59,7 @@ export default function Onemore(props) {
         }
 
 launches && organise();
-  console.log( 'arrr:',  arr)
+
 
 
 
@@ -66,7 +77,7 @@ launches && organise();
         data={arr}
         renderItem={ ({item}) => (
 
-            <View style={styles.seperate}  >
+            <View style={styles.seperate} key ={Math.random() } >
             <Text style={styles.txt} > Mission: {item.name} </Text>
             <Text style={styles.txt} > Date: {item.date} </Text>
             <Text style={styles.txt} > Country: {item.country} </Text>
@@ -125,6 +136,7 @@ const styles = StyleSheet.create({
     width: '95%',
     height: 250,
     borderRadius: 18,
+    
 
     
   },
@@ -134,6 +146,7 @@ const styles = StyleSheet.create({
   },
   cont: {
     marginTop: '10%',
+    marginLeft: '4%',
   }
 
 });
