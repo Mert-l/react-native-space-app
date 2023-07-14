@@ -14,7 +14,6 @@ import Spinner from "react-native-loading-spinner-overlay";
 // import { useRoute } from "@react-navigation/native";
 import { Dimensions } from "react-native";
 
-
 export default function Another({ route, navigation }) {
   // const route = useRoute()
   const [articles, setArticles] = useState(null);
@@ -23,8 +22,6 @@ export default function Another({ route, navigation }) {
   useLayoutEffect(() => {
     navigation.setOptions({ headerTintColor: "#0F2357" });
   });
-
-
 
   useEffect(() => {
     const fetch_first_pics = async () => {
@@ -37,8 +34,8 @@ export default function Another({ route, navigation }) {
           loaded: false,
         }));
         setArticles(result);
-       
-         setSpinning(false)
+
+        setSpinning(false);
       } catch (error) {
         console.log(error);
       }
@@ -51,18 +48,17 @@ export default function Another({ route, navigation }) {
   const handleLoading = (idx) => {
     let objToString = JSON.stringify(articles);
     let copyObj = JSON.parse(objToString);
+    console.log(copyObj[idx].loaded);
     if (!copyObj[idx].loaded) {
       copyObj[idx].loaded = true;
       setArticles(copyObj);
-       console.log('ble')
+      console.log("ble");
     }
-   
   };
 
   useEffect(() => {
     if (articles && articles.length > 0) {
-      let new_ = articles.slice(0, 2)
-      if (new_.every((art) => art.loaded)) {
+      if (articles.every((art) => art.loaded === true)) {
         setSpinning(false);
       }
     }
@@ -76,34 +72,39 @@ export default function Another({ route, navigation }) {
         textStyle={styles.spinnerTextStyle}
       />
 
-      <ScrollView  style={styles.cont}  >
+      <ScrollView style={styles.cont}>
         {articles &&
           articles.map((ele, idx) => {
             return (
-              <View style={styles.seperate}  key ={idx *Math.random() } >
-                <Text  style={ styles.title}  > {ele.data.title} </Text>
-                <Text  style={ styles.other} > {ele.data.news_site} </Text>
+              <View style={styles.seperate} key={idx * Math.random()}>
+                <Text style={styles.title}> {ele.data.title} </Text>
+                <Text style={styles.other}> {ele.data.news_site} </Text>
 
                 <Image
                   style={{
                     height: Dimensions.get("window").height * 0.35,
-                    width: Dimensions.get("window").width  ,
-                    shadowOffset: {width: 4, height: 10},
+                    width: Dimensions.get("window").width,
+                    shadowOffset: { width: 4, height: 10 },
                     shadowOpacity: 0.1,
                     shadowRadius: 6,
-                    padding: '20%',
-                  
+                    padding: "20%",
                   }}
                   source={{
                     uri: ele.data.image_url,
                   }}
-                  onLoadEnd={() => handleLoading(idx)}
+                  onLoad={() => handleLoading(idx)}
                 />
 
-                <Text  style={ styles.other} > {ele.data.summary} </Text>
+                <Text style={styles.other}> {ele.data.summary} </Text>
 
                 <Text
-                  style={{ color: "#0F2357", textDecorationLine: 'underline', fontWeight: 600, marginBottom: '1%', padding: '2%' }}
+                  style={{
+                    color: "#0F2357",
+                    textDecorationLine: "underline",
+                    fontWeight: 600,
+                    marginBottom: "1%",
+                    padding: "2%",
+                  }}
                   onPress={() => Linking.openURL(ele.data.url)}
                 >
                   Check it out!
@@ -126,41 +127,39 @@ const styles = StyleSheet.create({
 
   seperate: {
     marginTop: "5%",
-  
-    shadowOffset: {width: 4, height: 6},
+
+    shadowOffset: { width: 4, height: 6 },
     shadowOpacity: 0.2,
     shadowRadius: 6,
-     backgroundColor: '#F0F3F8',
-    
-   
+    backgroundColor: "#F0F3F8",
   },
   spinnerTextStyle: {
-    color: 'white',
+    color: "white",
   },
   cont: {
-    marginTop: '7%',
+    marginTop: "7%",
   },
   title: {
-    fontSize: 20, 
-    color: '#0F2357' ,
+    fontSize: 20,
+    color: "#0F2357",
     // fontFamily: 'American Typewriter, serif',
-    fontWeight: '600',
-    padding: '2%',
+    fontWeight: "600",
+    padding: "2%",
     paddingLeft: 0,
-    shadowOffset: {width: 4, height: 5},
+    shadowOffset: { width: 4, height: 5 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
   },
   other: {
-    fontSize: 16, 
-    color: '#0F2357' ,
+    fontSize: 16,
+    color: "#0F2357",
     // fontFamily: 'American Typewriter, serif',
-    fontWeight: '500',
-    padding: '2%',
+    fontWeight: "500",
+    padding: "2%",
     // paddingLeft: 0,
-    padding: '2%',
-    shadowOffset: {width: 4, height: 5},
+    padding: "2%",
+    shadowOffset: { width: 4, height: 5 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
-  }
+  },
 });
