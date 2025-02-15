@@ -1,2 +1,1 @@
-This is a react native app made with javascript, html and css. It uses few differant apis and allows users to view raw photos from Curiosity rover on Mars, 
-stay up to date with the latest news ralating to space, and check out some upcoming rocket launches.
+This is a React Native app made with JavaScript, HTML, and CSS. It uses a few different APIs and allows users to view raw photos from the Curiosity rover on Mars, stay up to date with the latest news relating to space, and check out some upcoming rocket launches.
