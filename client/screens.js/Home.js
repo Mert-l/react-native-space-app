@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, useWindowDimensions } from 'react-native';
+import { View, useWindowDimensions , Text, StyleSheet} from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import Another from  "./Another.js"
 import Onemore from  "./Onemore.js"
@@ -63,27 +63,28 @@ export default function Home() {
       renderTabBar={renderTabBar}
       
     />
+
   );
 }
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: "#fff",
-//     alignItems: "center",
-//     justifyContent: "center",
-//   },
-//   video: {
-//     flex: 1,
-//     width: "100%",
-//   },
-//   menu_icon:{
-//     backgroundColor: 'red',
-//     width: '100%',
-//     height: '30%',
-//     position: 'absolute',
-//     top: 100,
-//     left: 100,
-//   }
-// });
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  video: {
+    flex: 1,
+    width: "100%",
+  },
+  menu_icon:{
+    backgroundColor: 'red',
+    width: '100%',
+    height: '30%',
+    position: 'absolute',
+    top: 100,
+    left: 100,
+  }
+});
 

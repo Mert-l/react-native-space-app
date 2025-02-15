@@ -234,8 +234,8 @@ const styles = StyleSheet.create({
   },
   opn: {
     position: 'absolute',
-    top:90,
-    left: 0,
+    top:9,
+    left: -10,
     
     height: 60,
     width:60,

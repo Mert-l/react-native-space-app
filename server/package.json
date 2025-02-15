@@ -9,10 +9,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@unimodules/core": "^7.2.0",
     "axios": "^1.4.0",
+    "expo": "^45.0.8",
     "expo-server-sdk": "^3.7.0",
     "express": "^4.18.2",
     "fs": "^0.0.1-security",
-    "node-cron": "^3.0.2"
+    "node-cron": "^3.0.2",
+    "react-native": "^0.68.2"
+  },
+  "devDependencies": {
+    "metro": "^0.80.12"
   }
 }

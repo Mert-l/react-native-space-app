@@ -20,7 +20,7 @@ export default function Another({ route, navigation }) {
   const [spinning, setSpinning] = useState(true);
 
   useLayoutEffect(() => {
-    navigation.setOptions({ headerTintColor: "#0F2357" });
+    navigation.setOptions({ headerTintColor: "rgb(237, 228, 228)" });
   });
 
   useEffect(() => {
@@ -48,11 +48,11 @@ export default function Another({ route, navigation }) {
   const handleLoading = (idx) => {
     let objToString = JSON.stringify(articles);
     let copyObj = JSON.parse(objToString);
-    console.log(copyObj[idx].loaded);
+    // console.log(copyObj[idx].loaded);
     if (!copyObj[idx].loaded) {
       copyObj[idx].loaded = true;
       setArticles(copyObj);
-      console.log("ble");
+      // console.log("ble");
     }
   };
 
@@ -83,11 +83,12 @@ export default function Another({ route, navigation }) {
                 <Image
                   style={{
                     height: Dimensions.get("window").height * 0.35,
-                    width: Dimensions.get("window").width,
+                    width:"114%" ,
                     shadowOffset: { width: 4, height: 10 },
                     shadowOpacity: 0.1,
                     shadowRadius: 6,
-                    padding: "20%",
+                    padding: "10%",
+                    alignSelf: "center",
                   }}
                   source={{
                     uri: ele.data.image_url,
